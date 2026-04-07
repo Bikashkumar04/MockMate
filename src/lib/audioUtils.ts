@@ -39,6 +39,8 @@ export class AudioRecorder {
 
     this.source.connect(this.processor);
     this.processor.connect(this.context.destination);
+
+    return this.stream;
   }
 
   stop() {
