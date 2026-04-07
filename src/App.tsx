@@ -265,10 +265,10 @@ export default function App() {
               className="w-full h-full object-cover"
             />
           </div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-[#f7c948]">
+          <h1 className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#f7c948] to-[#f0ebce]">
             MockMate
           </h1>
-          <p className="mt-3 text-base text-blue-100">
+          <p className="mt-3 text-base text-blue-100/90 font-medium">
             I help you practice mock interviews so you do not fail in real interviews.
           </p>
         </div>
