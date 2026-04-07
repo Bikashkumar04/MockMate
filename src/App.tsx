@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLiveInterview } from './hooks/useLiveInterview';
 import { extractTextFromPdf } from './lib/pdfUtils';
-import { Upload, Mic, Square, FileText, Download, Loader2, Play, Video } from 'lucide-react';
+import { Upload, Square, FileText, Download, Loader2, Play, Video } from 'lucide-react';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { cn } from './lib/utils';
-import aiAvatar from './assets/ai-avatar.svg';
+import aiAvatar from './assets/iavatar.jpg';
 
 export default function App() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -258,14 +258,18 @@ export default function App() {
     <div className="min-h-screen bg-[#0b1f4d] py-10 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#f7c948] text-[#0b1f4d] mb-5 shadow-lg shadow-black/20">
-            <Mic className="w-8 h-8" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#f7c948] mb-5 shadow-lg shadow-black/20 overflow-hidden">
+            <img
+              src={aiAvatar}
+              alt="MockMate icon"
+              className="w-full h-full object-cover"
+            />
           </div>
           <h1 className="text-4xl font-extrabold tracking-tight text-[#f7c948]">
             MockMate
           </h1>
           <p className="mt-3 text-base text-blue-100">
-            A simple and smart mock interview experience tailored to your role.
+            I help you practice mock interviews so you do not fail in real interviews.
           </p>
         </div>
 
