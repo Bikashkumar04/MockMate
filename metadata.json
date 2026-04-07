@@ -1,0 +1,8 @@
+{
+  "name": "AI Mock Interviewer",
+  "description": "An AI agent that conducts mock interviews using Gemini Live based on your resume and job description, and generates a feedback report.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}
