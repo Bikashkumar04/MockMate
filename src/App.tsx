@@ -5,6 +5,7 @@ import { Upload, Mic, Square, FileText, Download, Loader2, Play, Video } from 'l
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { cn } from './lib/utils';
+import aiAvatar from './assets/ai-avatar.svg';
 
 export default function App() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -192,8 +193,16 @@ export default function App() {
             
             {/* AI Avatar / Wave Overlay */}
             {isConnected && (
-              <div className="absolute top-6 right-6 bg-gray-900/80 backdrop-blur-md p-6 rounded-2xl border border-gray-700 shadow-xl flex flex-col items-center gap-4">
-                <div className="text-gray-300 text-sm font-medium mb-2">AI Interviewer</div>
+              <div className="absolute top-6 right-6 bg-gray-900/85 backdrop-blur-md p-5 rounded-2xl border border-gray-700 shadow-xl flex flex-col items-center gap-4 min-w-52">
+                <div className="text-gray-200 text-sm font-medium">AI Interviewer</div>
+                <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-blue-300 shadow-lg shadow-blue-500/25">
+                  <img
+                    src={aiAvatar}
+                    alt="MockMate AI interviewer avatar"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                </div>
                 <div className="flex items-end justify-center gap-1.5 h-12">
                   {[...Array(5)].map((_, i) => (
                     <div
@@ -246,85 +255,79 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen bg-[#0b1f4d] py-10 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-600 text-white mb-6 shadow-lg shadow-blue-600/20">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#f7c948] text-[#0b1f4d] mb-5 shadow-lg shadow-black/20">
             <Mic className="w-8 h-8" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 tracking-tight mb-3">
-            AI Mock Interviewer
+          <h1 className="text-4xl font-extrabold tracking-tight text-[#f7c948]">
+            MockMate
           </h1>
-          <p className="text-lg text-gray-600">
-            Practice your interview skills with a real-time AI agent tailored to your resume and target role.
+          <p className="mt-3 text-base text-blue-100">
+            A simple and smart mock interview experience tailored to your role.
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-sm border border-gray-200 p-8">
-          <div className="space-y-8">
-            
-            {/* Job Description */}
-            <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
-                Job Description
-              </label>
-              <textarea
-                value={jobDescription}
-                onChange={(e) => setJobDescription(e.target.value)}
-                placeholder="Paste the job description here..."
-                className="w-full h-40 p-4 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none text-gray-700"
-              />
-            </div>
+        <div className="bg-white rounded-2xl shadow-xl border border-[#f0d98c] p-6 sm:p-8 space-y-6">
+          <div>
+            <label className="block text-sm font-semibold text-[#0b1f4d] mb-2">
+              Job Description
+            </label>
+            <textarea
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+              placeholder="Paste the job description here..."
+              className="w-full h-36 p-4 rounded-xl border border-blue-200 bg-blue-50/40 focus:bg-white focus:ring-2 focus:ring-[#f7c948] focus:border-transparent transition-all resize-none text-[#0b1f4d]"
+            />
+          </div>
 
-            {/* Resume Upload */}
-            <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
-                Your Resume
-              </label>
-              <div className="relative group">
-                <input
-                  type="file"
-                  accept=".pdf,.txt"
-                  onChange={handleFileUpload}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                />
-                <div className={cn(
-                  "w-full p-8 rounded-xl border-2 border-dashed transition-colors flex flex-col items-center justify-center gap-3",
-                  resumeFileName ? "border-blue-500 bg-blue-50" : "border-gray-300 bg-gray-50 group-hover:border-blue-400 group-hover:bg-blue-50/50"
-                )}>
-                  {isExtracting ? (
-                    <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-                  ) : resumeFileName ? (
-                    <>
-                      <FileText className="w-8 h-8 text-blue-500" />
-                      <span className="text-blue-700 font-medium">{resumeFileName}</span>
-                      <span className="text-blue-500/70 text-sm">Click or drag to replace</span>
-                    </>
-                  ) : (
-                    <>
-                      <Upload className="w-8 h-8 text-gray-400 group-hover:text-blue-500 transition-colors" />
-                      <span className="text-gray-600 font-medium">Upload Resume (PDF or TXT)</span>
-                      <span className="text-gray-400 text-sm">Max 5MB</span>
-                    </>
-                  )}
-                </div>
+          <div>
+            <label className="block text-sm font-semibold text-[#0b1f4d] mb-2">
+              Your Resume
+            </label>
+            <div className="relative group">
+              <input
+                type="file"
+                accept=".pdf,.txt"
+                onChange={handleFileUpload}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+              />
+              <div className={cn(
+                "w-full p-7 rounded-xl border-2 border-dashed transition-colors flex flex-col items-center justify-center gap-2",
+                resumeFileName ? "border-[#f7c948] bg-[#fff8de]" : "border-blue-300 bg-blue-50/30 group-hover:border-[#f7c948] group-hover:bg-[#fff8de]"
+              )}>
+                {isExtracting ? (
+                  <Loader2 className="w-7 h-7 text-[#0b1f4d] animate-spin" />
+                ) : resumeFileName ? (
+                  <>
+                    <FileText className="w-7 h-7 text-[#0b1f4d]" />
+                    <span className="text-[#0b1f4d] font-semibold">{resumeFileName}</span>
+                    <span className="text-[#375a9d] text-sm">Click to replace</span>
+                  </>
+                ) : (
+                  <>
+                    <Upload className="w-7 h-7 text-[#375a9d] group-hover:text-[#0b1f4d] transition-colors" />
+                    <span className="text-[#0b1f4d] font-medium">Upload Resume (PDF or TXT)</span>
+                    <span className="text-[#375a9d] text-sm">Max 5MB</span>
+                  </>
+                )}
               </div>
             </div>
-
-            {/* Start Button */}
-            <button
-              onClick={handleStart}
-              disabled={!jobDescription || !resumeText || isExtracting}
-              className="w-full py-4 px-6 rounded-xl bg-gray-900 text-white font-medium text-lg hover:bg-gray-800 focus:ring-4 focus:ring-gray-900/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
-            >
-              <Play className="w-5 h-5 fill-current" />
-              Start Mock Interview
-            </button>
-            
-            {error && (
-              <p className="text-red-500 text-sm text-center mt-2">{error}</p>
-            )}
           </div>
+
+          <button
+            onClick={handleStart}
+            disabled={!jobDescription || !resumeText || isExtracting}
+            className="w-full py-3.5 px-6 rounded-xl bg-[#0b1f4d] text-[#f7c948] font-semibold text-lg hover:bg-[#132c67] disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+          >
+            <Play className="w-5 h-5 fill-current" />
+            Start Mock Interview
+          </button>
+
+          {error && (
+            <p className="text-red-500 text-sm text-center">{error}</p>
+          )}
         </div>
       </div>
     </div>
